@@ -162,6 +162,46 @@ class linkedList {
 
     return false;
   }
+
+  // // allows us to add new Node anywhere(start, mid, end etc.) in the linkedList
+  insert(index, value) {
+    if (index === 0) {
+      return this.unshift(value);
+    }
+
+    if (index === this.length) {
+      return this.push(value);
+    }
+
+    const newNode = new Node(value);
+
+    // // use get method to find the node right before the desired position (index - 1).
+
+    const temp = this.get(index - 1);
+
+    newNode.next = temp.next;
+    temp.next = newNode;
+    this.length++;
+    return true;
+  }
+
+  // // gives us the total Number of Nodes inside our LinkedList - (i.e 1 or 3 or any number.)
+  size() {
+    let counter = 0;
+    let temp = this.head;
+
+    while (temp) {
+      counter++;
+      temp = temp.next;
+    }
+
+    return counter;
+  }
+
+  // // this will remove all the Nodes from our LinkedList - empty the linkedList
+  clear() {
+    this.head = null;
+  }
 }
 
 const myLinkedList = new linkedList(0);
@@ -182,5 +222,12 @@ const myLinkedList = new linkedList(0);
 myLinkedList.push(10);
 myLinkedList.push(20);
 
-console.log(myLinkedList.set(2, 500)); // true
-console.log(myLinkedList);
+// console.log(myLinkedList.set(2, 500)); // true
+// console.log(myLinkedList);         // the value of Node is updated now.
+
+// console.log(myLinkedList.insert(0, 111)); // true
+// console.log(myLinkedList); // the new Node is added successfully in the given location.
+
+// console.log(myLinkedList.size()); // this will provide the size of our Nodes in linkedList like 2 or 5 etc.
+
+console.log(myLinkedList.clear()); // this is give result undefined, because our linkedlist is empty now
